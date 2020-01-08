@@ -2,18 +2,7 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
+.App {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -24,15 +13,72 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.login-box, .form{
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.login-button{
+  padding: 8px;
+  margin-top: 20px;
+  width: 100px;
+  border-radius: 5px;
+}
+
+.input-box{
+  width: 150px;
+  padding: 10px;
+}
+
+label{
+  margin-bottom: 20px;
+}
+
+.messages{
+  font-size: 12px;
+  text-align: left;
+ 
+  padding: 5px;
+  margin: 5px;
+}
+
+.messages:nth-child(even){
+  background-color: rgba(255, 253, 247, 0.2) ;
+}
+
+.uName{
+  display: block;
+  color: rgb(255, 196, 0);
+  font-weight: bold;
+}
+
+.send-button {
+  margin-bottom: 10px;
+  width: 20%;
+  height: 36px;
+}
+
+.chatbox{
+  width: 500px;
+  margin: 60px 0;
+  padding: 20px;
+  background-color: rgb(6, 118, 138);
+  border-radius: 10px;
+}
+
+.chat-form{
+  margin-top: 20px;
+  display: flex;
+  flex-flow: row wrap;
+  align-items:stretch;
+}
+
+.chat-input{
+  width: 78%;
+  height: 30px;
+}
+
+.textMessages{
+  color: rgb(255, 255, 255);
 }

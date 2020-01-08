@@ -1,26 +1,53 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Login from './Login';
+import Chatbox from './Chatbox';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+render(){
+    return (
+      <div className="App">
+              <Login/>
+              <Chatbox/>
+      </div>
+    );
+  } 
+
+  /* constructor(props){
+    super(props);
+    this.state = {
+                 status : null,
+                };
+    this.DataFromLogin = this.DataFromLogin.bind(this);
+ 
+    }
+
+    DataFromLogin = (err, data) => {
+      this.setState({status: data})
+      console.log(data);
+    }
+
+
+
+    render(){
+
+        let content;
+
+          
+
+        if (this.state.status === null) {
+                content = <Login/>
+            } else {
+                content = <Chatbox/>
+            }
+
+        
+        return (<div className = "App">
+                   {content}
+              </div>
+              
+        );
+      } */
 }
 
 export default App;
