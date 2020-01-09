@@ -4,50 +4,49 @@ import Login from './Login';
 import Chatbox from './Chatbox';
 
 class App extends React.Component {
-render(){
+
+  constructor(props){
+    super(props);
+    this.state = {status : false, 
+                  username: "",
+                  counter: 0,
+                  }
+    this.onLoginSubmit = this.onLoginSubmit.bind(this);
+    this.onTextInputChange = this.onTextInputChange.bind(this);
+    this.onChangeCounter = this.onChangeCounter.bind(this);
+  }
+
+  onLoginSubmit(status) {
+    this.setState({status: status})
+  }
+
+  onTextInputChange(value, count) {
+    //this.setState({counter: value.length})
+    this.setState({username: value});
+    this.setState({counter: count})
+  }
+
+  onChangeCounter(count){
+    this.setState({counter: count})
+  }
+  
+  render(){
+
+
+    let renderPage;
+
+    if (!this.state.status){
+        renderPage = <Login onSubmit={this.onLoginSubmit} onChange={this.onTextInputChange} counter={this.state.counter} value={this.state.value}/>
+    } else {
+        renderPage = <Chatbox username={this.state.username}/>
+    }
+
     return (
       <div className="App">
-              <Login/>
-              <Chatbox/>
+              {renderPage} 
       </div>
     );
-  } 
-
-  /* constructor(props){
-    super(props);
-    this.state = {
-                 status : null,
-                };
-    this.DataFromLogin = this.DataFromLogin.bind(this);
- 
-    }
-
-    DataFromLogin = (err, data) => {
-      this.setState({status: data})
-      console.log(data);
-    }
-
-
-
-    render(){
-
-        let content;
-
-          
-
-        if (this.state.status === null) {
-                content = <Login/>
-            } else {
-                content = <Chatbox/>
-            }
-
-        
-        return (<div className = "App">
-                   {content}
-              </div>
-              
-        );
-      } */
+  }  
 }
 
 export default App;

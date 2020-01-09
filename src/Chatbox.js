@@ -8,7 +8,8 @@ class Chatbox extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            value: "",    
+            value: "",  
+            counter: 0,  
         }
         DataMessagesHistory((err, chatHistory) => this.setState({dataHistory: chatHistory}));
         DataMessagesUpdate((err, chatUpdate) => this.setState({dataUpdate: chatUpdate}));
@@ -19,6 +20,7 @@ class Chatbox extends React.Component{
     
     onChange(e){
           this.setState({value: e.target.value});
+
          /*  let input = e.target.value;
           console.log(input);    */
     } 
@@ -34,6 +36,7 @@ class Chatbox extends React.Component{
         }, (response) =>{
             console.log("Emitted", response)
         }); 
+        this.setState({value: ""});
 
     }
 
@@ -44,8 +47,8 @@ class Chatbox extends React.Component{
         let updateData;
         let dataH = this.state.dataHistory;
         let dataU = this.state.dataUpdate;
-        console.log(dataH);
-        console.log(dataU);
+        //console.log(dataH);
+        //console.log(dataU);
         
         if (dataH !== undefined){
          printData = dataH.map(data =>{
@@ -65,13 +68,20 @@ class Chatbox extends React.Component{
 
         return (
                 <div className="chatbox">
-                    {/*<h3>Your username is: {this.props.username}</h3>*/}
-                    {printData}
-                    {updateData}
-                    <form className="chat-form" onSubmit = {this.onSubmit}>
-                        <input className="chat-input" type="text" value={this.state.value} onChange={this.onChange}/>
-                        <button className="send-button">Send</button>
-                    </form>
+                    <div className="render-messages">
+                        {printData}
+                        {updateData}
+                    </div>
+                    <div className="chat-input-container">
+                        <h5>Hello, {this.props.username}</h5>
+                        <form className="chat-form" onSubmit = {this.onSubmit}>
+                            <input className="chat-input" type="text" value={this.state.value} onChange={this.onChange}/>
+                            <button className="send-button">Send</button>
+                            <span className="input-label">Maximum 200 characters</span>
+                            <span className="input-label2">{this.state.counter}/200</span>
+                        </form>
+                    </div>
+                   
                 </div>
             )
     }

@@ -1,22 +1,26 @@
-.App {
-  text-align: center;
-}
 
 .App {
   background-color: #282c34;
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  text-align: center;
 }
 
 .login-box, .form{
   display: flex;
   flex-flow: column wrap;
   align-items: center;
+}
+
+.form{
+  padding: 40px;
+  border-radius: 10px;
+  background-color: cadetblue;
 }
 
 .login-button{
@@ -27,20 +31,22 @@
 }
 
 .input-box{
-  width: 150px;
+  width: 250px;
   padding: 10px;
 }
 
 label{
   margin-bottom: 20px;
+  font-size: 15px;
 }
 
 .messages{
   font-size: 12px;
   text-align: left;
- 
-  padding: 5px;
-  margin: 5px;
+  background-color: rgba(255, 253, 247, 0.2) ;
+  padding: 10px;
+  margin: 8px;
+  width: 100%;
 }
 
 .messages:nth-child(even){
@@ -56,29 +62,66 @@ label{
 .send-button {
   margin-bottom: 10px;
   width: 20%;
-  height: 36px;
+  height: 36.7px;
 }
 
 .chatbox{
-  width: 500px;
+  width: 80%;
+  height: 80%;
   margin: 60px 0;
   padding: 20px;
   background-color: rgb(6, 118, 138);
   border-radius: 10px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
 }
 
 .chat-form{
-  margin-top: 20px;
+  margin-top: 0px;
   display: flex;
   flex-flow: row wrap;
-  align-items:stretch;
+  justify-items:space-between;
+  position: relative;
 }
 
 .chat-input{
-  width: 78%;
+  width: 79%;
   height: 30px;
 }
 
 .textMessages{
   color: rgb(255, 255, 255);
+}
+
+.input-label, .input-label2{
+  font-size: 11px;
+  margin-top:-5px;
+}
+
+.input-label2{
+  right: 21%;
+  position: absolute;
+  bottom: 0;
+}
+
+.text-counter{
+  font-size: 10px;
+  padding-top: 5px;
+}
+
+.chatbox h5{
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.chat-input-container{
+  margin: 0px;
+  width: 100%;
+}
+
+.render-messages{
+  width: 100%;
+  overflow-y: scroll;
+  height: 80%;
 }

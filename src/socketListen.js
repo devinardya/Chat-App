@@ -9,11 +9,11 @@ function DataMessagesHistory(cb){
     });
   
     //getting all the messages sent before (history)
-    socket.on('messages', function(data){
+    socket.on('messages', data =>{
         console.log("messages", data);
         cb(null, data);
     });
   
 }
 
-export {DataMessagesHistory}
+export {DataMessagesHistory};
