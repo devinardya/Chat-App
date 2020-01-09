@@ -54,21 +54,42 @@ class Chatbox extends React.Component{
         let dataU = this.state.dataUpdate;
         //console.log(dataH);
         //console.log(dataU);
+        let classNameMessage;
+        let userCurrent = this.props.username;
+        console.log(userCurrent);
+
+      function checkMessages(data){
+            if (data === userCurrent){
+              return  classNameMessage = "user-messages";
+            } else {
+              return  classNameMessage = "messages";
+            }
+        } 
         
         if (dataH !== undefined){
          printData = dataH.map(data =>{
-                return (<p className="messages" key={data.id}>
-                            <span className="uName">{data.username}</span>
-                            <span  className="textMessages">{data.content}</span>
-                        </p>)
+                checkMessages(data.username);
+                return (<div className={classNameMessage} key={data.id}>
+                            <p className="uName">{data.username}</p>
+                            <p  className="textMessages">{data.content}</p>
+                        </div>)
             })  
         }
 
         if (dataU !== undefined){
-            updateData = (<p className="messages" >
-                                    <span className="uName">{dataU.username}</span>
-                                    <span className="textMessages">{dataU.content}</span>
-                        </p>)
+            if (this.props.username === dataU.username){
+                updateData = (<div className="user-messages" >
+                    <p className="uName">{dataU.username}</p>
+                    <p className="textMessages">{dataU.content}</p>
+                </div>)
+            } else {  
+                updateData = (<div className="messages" >
+                    <p className="uName">{dataU.username}</p>
+                    <p className="textMessages">{dataU.content}</p>
+             </div>)
+
+            }
+           
         }
 
         return (
