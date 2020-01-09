@@ -60,8 +60,8 @@ class Login extends React.Component{
                  newPage = (<form className = "form" onSubmit = {this.onSubmit}>
                         <h3>Log in</h3>
                         <h5>Please log in to join the chat room!</h5>
-                        <label className="username">Username can not be longer than 12 character!</label>
                         <input className="input-box" type="text" placeholder="Username" username={this.props.value} onChange={this.onChange}/>
+                        <label className="username">Username can not be longer than 12 character!</label>
                         <span style={{color: namecolor}} className="text-counter">{this.props.counter}/12</span>
                         {warning}
                         <button className="login-button">Log in</button>
