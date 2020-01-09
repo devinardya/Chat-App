@@ -11,12 +11,17 @@ class Chatbox extends React.Component{
             value: "",  
             counter: 0,  
         }
-        DataMessagesHistory((err, chatHistory) => this.setState({dataHistory: chatHistory}));
-        DataMessagesUpdate((err, chatUpdate) => this.setState({dataUpdate: chatUpdate}));
+        // DataMessagesHistory((err, chatHistory) => this.setState({dataHistory: chatHistory}));
+        // DataMessagesUpdate((err, chatUpdate) => this.setState({dataUpdate: chatUpdate}));
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     
       }
+
+    componentDidMount(){
+        DataMessagesHistory((err, chatHistory) => this.setState({dataHistory: chatHistory}));
+        DataMessagesUpdate((err, chatUpdate) => this.setState({dataUpdate: chatUpdate}));
+    }  
     
     onChange(e){
           this.setState({value: e.target.value});
