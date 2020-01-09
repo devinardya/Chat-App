@@ -48,7 +48,7 @@ class Login extends React.Component{
 
         let namecolor;
         if (this.props.counter <= 12){
-            namecolor = "white";
+            namecolor = "grey";
         } else {
             namecolor = "red";
         }
@@ -57,17 +57,18 @@ class Login extends React.Component{
         let warning;
         if(this.state.valid){
             
-            newPage = (<form className = "form" onSubmit = {this.onSubmit}>
-                                <h3>Login to start chat box!</h3>
-                                <label>Username:</label>
-                                <input className="input-box" type="text" username={this.props.value} onChange={this.onChange}/>
-                                <span style={{color: namecolor}} className="text-counter">{this.props.counter}/12</span>
-                                {warning}
-                                <button className="login-button">Log in</button>
+                 newPage = (<form className = "form" onSubmit = {this.onSubmit}>
+                        <h3>Log in</h3>
+                        <h5>Please log in to join the chat room!</h5>
+                        <label className="username">Username can not be longer than 12 character!</label>
+                        <input className="input-box" type="text" placeholder="Username" username={this.props.value} onChange={this.onChange}/>
+                        <span style={{color: namecolor}} className="text-counter">{this.props.counter}/12</span>
+                        {warning}
+                        <button className="login-button">Log in</button>
                                 
                         </form>
                         )
-                        }
+            }
 
         return  (<div className = "login-box">
                     {newPage}

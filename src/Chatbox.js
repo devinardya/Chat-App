@@ -75,9 +75,9 @@ class Chatbox extends React.Component{
                     <div className="chat-input-container">
                         <h5>Hello, {this.props.username}</h5>
                         <form className="chat-form" onSubmit = {this.onSubmit}>
-                            <input className="chat-input" type="text" value={this.state.value} onChange={this.onChange}/>
+                            <input className="chat-input" type="text" placeholder="Enter messages..." value={this.state.value} onChange={this.onChange}/>
                             <button className="send-button">Send</button>
-                            <span className="input-label">Maximum 200 characters</span>
+                            <span className="input-label">Maximum 200 words</span>
                             <span className="input-label2">{this.state.counter}/200</span>
                         </form>
                     </div>

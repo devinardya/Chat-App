@@ -1,6 +1,7 @@
 
 .App {
-  background-color: #282c34;
+  background: rgb(255,0,104);
+  background: linear-gradient(135deg, rgba(255,0,104,1) 0%, rgba(50,22,82,1) 100%);
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -9,6 +10,7 @@
   font-size: calc(10px + 2vmin);
   color: white;
   text-align: center;
+
 }
 
 .login-box, .form{
@@ -20,24 +22,59 @@
 .form{
   padding: 40px;
   border-radius: 10px;
-  background-color: cadetblue;
+  background-color: rgb(241, 241, 241);
+  -webkit-box-shadow: 0px 1px 26px -4px rgba(0,0,0,0.58);
+  -moz-box-shadow: 0px 1px 26px -4px rgba(0,0,0,0.58);
+  box-shadow: 0px 1px 26px -4px rgba(0,0,0,0.58);
+}
+
+.form h3, .form h5{
+  margin: 0;
+  color: rgb(43, 15, 88);
+}
+
+.form h5{
+  font-size: 12px;
+  margin-bottom: 30px;
+  margin-top: 3px;
+}
+
+.input-box input::placeholder {
+  color: white;
 }
 
 .login-button{
   padding: 8px;
   margin-top: 20px;
   width: 100px;
-  border-radius: 5px;
+  border-radius: 50px;
+  text-transform: uppercase;
+  background-color: orange;
+  border: none;
+  color: white;
+}
+
+.login-button:hover{
+  cursor:pointer;
 }
 
 .input-box{
   width: 250px;
-  padding: 10px;
+  padding: 15px;
+  padding-left: 20px;
+  border-radius: 50px;
+  border: none;
+  background-color: #aaaaaa;
+  box-shadow: inset 0px 1px 35px -10px rgba(99, 99, 99, 0.58);
+  color: white;
+  font-size: 13px;
+  font-weight: bold;
 }
 
-label{
-  margin-bottom: 20px;
-  font-size: 15px;
+.username{
+  margin-bottom: 5px;
+  font-size: 10px;
+  color: #737373;
 }
 
 .messages{
@@ -45,7 +82,7 @@ label{
   text-align: left;
   background-color: rgba(255, 253, 247, 0.2) ;
   padding: 10px;
-  margin: 8px;
+  margin: 8px 0px;
   width: 100%;
 }
 
@@ -62,15 +99,19 @@ label{
 .send-button {
   margin-bottom: 10px;
   width: 20%;
-  height: 36.7px;
+  height: 36.52px;
+  border: none;
+  background-color: orange;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
 .chatbox{
   width: 80%;
   height: 80%;
   margin: 60px 0;
-  padding: 20px;
-  background-color: rgb(6, 118, 138);
+  padding: 35px;
+  background-color: rgb(28, 11, 68);
   border-radius: 10px;
   display: flex;
   flex-flow: row wrap;
@@ -86,8 +127,13 @@ label{
 }
 
 .chat-input{
-  width: 79%;
-  height: 30px;
+  width: calc(79% - 10px);
+  height: 34.2px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border: none;
+  padding-left: 10px;
+  background-color: #dddddd;
 }
 
 .textMessages{
@@ -113,6 +159,7 @@ label{
 .chatbox h5{
   text-align: left;
   margin-bottom: 10px;
+  margin-top: 25px;
 }
 
 .chat-input-container{
@@ -122,6 +169,7 @@ label{
 
 .render-messages{
   width: 100%;
-  overflow-y: scroll;
+  overflow-y: auto;
   height: 80%;
 }
+
