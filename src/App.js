@@ -23,7 +23,7 @@ class App extends React.Component {
   onTextInputChange(value, count) {
     //this.setState({counter: value.length})
     this.setState({username: value});
-    this.setState({counter: count})
+    this.setState({counter: count});
   }
 
   onChangeCounter(count){
@@ -32,11 +32,10 @@ class App extends React.Component {
   
   render(){
 
-
     let renderPage;
 
     if (!this.state.status){
-        renderPage = <Login onSubmit={this.onLoginSubmit} onChange={this.onTextInputChange} counter={this.state.counter} value={this.state.value}/>
+        renderPage = <Login onSubmit={this.onLoginSubmit} onChange={this.onTextInputChange} counter={this.state.counter} username={this.state.username}/>
     } else {
         renderPage = <Chatbox username={this.state.username}/>
     }

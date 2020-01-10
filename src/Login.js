@@ -46,28 +46,33 @@ class Login extends React.Component{
             console.log("this is wrong");
         } */
 
-        let namecolor;
-        if (this.props.counter <= 12){
-            namecolor = "grey";
+        let warncolor;
+        let newcolor;
+        let regex = /[!"#€%&/()=?+^¨*'_:;.,$]{1,12}/g
+        let validInput = regex.test(this.props.username);
+
+
+        if (this.props.counter <= 12 && validInput){
+            warncolor = {color: "red"}
+            newcolor = {color: "red"}
+           
         } else {
-            namecolor = "red";
+             warncolor = {color: "grey"}
+            newcolor = {color: "#252525"}
         }
 
         let newPage;
-        let warning;
         if(this.state.valid){
             
                  newPage = (<form className = "form" onSubmit = {this.onSubmit}>
                         <h3>Log in</h3>
                         <h5>Please log in to join the chat room!</h5>
-                        <input className="input-box" type="text" placeholder="Username" username={this.props.value} onChange={this.onChange}/>
-                        <label className="username">Username can not be longer than 12 character!</label>
-                        <span style={{color: namecolor}} className="text-counter">{this.props.counter}/12</span>
-                        {warning}
+                        <input className="input-box" type="text" style={newcolor} placeholder="Username" username={this.props.value} onChange={this.onChange}/>
+                        <label className="warning" style={warncolor}>Username can not be longer than 12 character!</label>
+                        <label className="warning" style={warncolor}>Can only use alfabets, "-" and numbers.</label>
                         <button className="login-button">Log in</button>
-                                
-                        </form>
-                        )
+                    </form>
+                    )
             }
 
         return  (<div className = "login-box">
