@@ -11,7 +11,7 @@ class Chatbox extends React.Component{
             value: "",  
             counter: 0,
         }
-        DataMessagesHistory((err, chatHistory) => this.setState({dataHistory: chatHistory}));
+        //DataMessagesHistory((err, chatHistory) => this.setState({dataHistory: chatHistory}));
         //DataMessagesUpdate((err, chatUpdate) => this.setState({dataUpdate: chatUpdate}));
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -19,21 +19,26 @@ class Chatbox extends React.Component{
       }
 
    componentDidMount(){
-  
-        DataMessagesUpdate((err, chatLastUpdate) => {
+         DataMessagesHistory((err, chatHistory) => this.setState({dataHistory: chatHistory}));
+       /*   DataMessagesUpdate((chatLastUpdate) => {
                 this.setState({dataLastUpdate: chatLastUpdate});
         
                 this.setState(prevState => ({
                     dataHistory: [...prevState.dataHistory, this.state.dataLastUpdate]
                   }))
-                });
 
-     
+                });     */
 
+        DataMessagesUpdate((err, neWMessage) => {
+                    let copyMessage = [...this.state.dataHistory];
+                    copyMessage.splice(0, 1);
+    
+                    this.setState({ dataHistory: [...copyMessage, neWMessage] }); // to push new message to history
+                  })
     }   
 
 
-    
+
     onChange(e){
           this.setState({value: e.target.value});
 
@@ -54,6 +59,8 @@ class Chatbox extends React.Component{
         }); 
         this.setState({value: ""});
     }
+
+    
 
 
     render(){
@@ -86,23 +93,10 @@ class Chatbox extends React.Component{
     if (dataH !== undefined){
 
         dataH.map(data =>{
-            
             return dataHis.push(data)
-        }) 
-    
-        
+        })
+        console.log(dataHis)
     }
-
-
-/*     if (dataU !== undefined){
-
-        let newIncoming = {username: dataU.username, content: dataU.content, timestamps: dataU.timestamps, id: dataU.id};
-        console.log(newIncoming);
-        console.log("incoming");
-        // dataHis.push(newIncoming);
-        console.log(dataHis);
-
-    } */
 
     printData = dataHis.map(data =>{
         checkMessages(data.username);
@@ -111,14 +105,6 @@ class Chatbox extends React.Component{
                     <p  className="textMessages">{data.content}</p>
                 </div>)
     })  
-
-/*     updateData = dataHis.map( newData => {
-        checkMessages(newData.username);
-        return  (<div className={classNameMessage} key={newData.timestamps}>
-                    <p className="uName">{newData.username}</p>
-                     <p  className="textMessages">{newData.content}</p>
-                </div>)
-                })   */
 
 
     // to check if the username is the same with the one from the server - to change chat bubble style
@@ -129,9 +115,6 @@ class Chatbox extends React.Component{
               return  classNameMessage = "messages";
             }
         } 
-
-
-
 
         return (
                 <div className="chatbox">
