@@ -89,7 +89,7 @@ class Login extends React.Component{
                         <h5>Please log in to join the chat room!</h5>
                         <input className="input-box" type="text" style={newcolor} placeholder="Username" username={this.props.value} onChange={this.onChange}/>
                         <label className="warning" style={warncolor}>{validateIcon1}Username have to be between 1 to 12 characters!</label>
-                        <label className="warning" style={warncolor2}>{validateIcon2}Username can only contains uppercase, lowercase, "-" and numbers.</label>
+                        <label className="warning" style={warncolor2}>{validateIcon2}Username can only contains uppercase, lowercase, "-", "_" and numbers.</label>
                         <button className="login-button">Log in</button>
                     </form>
                 )

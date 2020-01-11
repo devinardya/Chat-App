@@ -78,7 +78,7 @@
 }
 
 .input-box{
-  width: 250px;
+  width: 89%;
   padding: 15px;
   padding-left: 20px;
   border-radius: 50px;
@@ -118,7 +118,7 @@
 .user-messages{
     font-size: 12px;
     text-align: right;
-    background: rgba(112, 51, 192, 0.2);
+    background: rgba(253, 234, 252, 0.8);
     padding: 10px 20px;
     margin: 8px 0px;
     overflow-wrap: break-word;
@@ -241,7 +241,7 @@
 
 .render-messages{
   overflow-y: auto;
-  height: 74%;
+  height: 73%;
   display: flex;
   flex-direction: column;
   position : relative; 
@@ -257,6 +257,7 @@
  justify-content: space-between;
  background-color: #985da0;
  border-radius: 10px 10px 0 0;
+ margin-bottom: 8px;
 }
 
 .close-button{

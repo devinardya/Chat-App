@@ -4,6 +4,7 @@ import {DataMessagesUpdate} from './SocketWrite';
 import io from 'socket.io-client';
 import { MdClose } from "react-icons/md";
 import { MdAccountCircle } from "react-icons/md";
+import {emojify} from 'react-emojione';
 
 
 class Chatbox extends React.Component{
@@ -115,7 +116,7 @@ class Chatbox extends React.Component{
                 console.log(word)
                 return <a key={word} href={word}>{word}</a>
             }
-            return " " + word + " ";
+            return emojify(" " + word + " ", {output: 'unicode'});
         })
 
 
@@ -124,9 +125,6 @@ class Chatbox extends React.Component{
                     <p  className="textMessages">{content}</p>
                 </div>)
     })  
-
-    
-
 
     // to check if the username is the same with the one from the server - to change chat bubble style
       function checkMessages(data){
@@ -140,12 +138,7 @@ class Chatbox extends React.Component{
         return (
                 <div className="chatbox">
                     <div className="profile">
-                        <h5><MdAccountCircle 
-                            className="profile-icon" 
-                            size="30px" 
-                            color="white" 
-                            onClick={this.onCloseChat}
-                            /> 
+                        <h5><MdAccountCircle className="profile-icon" size="30px" color="white" onClick={this.onCloseChat}/> 
                             {this.props.username}
                         </h5>
                         <span className="close-button"><MdClose size="30px" color="white" onClick={this.onCloseChat}/></span>
@@ -154,21 +147,13 @@ class Chatbox extends React.Component{
                         {printData}
                     </div>
                     <div className="chat-input-container">
-                        <form 
-                            className="chat-form" 
-                            onSubmit = {getSubmit}>
-                            <input 
-                                className="chat-input" 
-                                style={newcolor} type="text" 
-                                placeholder="Enter messages..." 
-                                value={this.state.value} 
-                                onChange={this.onChange}/>
+                        <form className="chat-form" onSubmit = {getSubmit}>
+                            <input className="chat-input" style={newcolor} type="text" placeholder="Enter messages..." value={this.state.value} onChange={this.onChange}/>
                             <button className="send-button">Send</button>
                             <span className="input-label">Maximum 200 characters</span>
                             <span className="input-label2" style={newcolor}>{count}/200</span>
                         </form>
                     </div>
-                   
                 </div>
             )
     }
