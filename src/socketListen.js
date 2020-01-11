@@ -14,6 +14,8 @@ function DataMessagesHistory(cb){
         cb(null, data);
     });
   
-}
+} 
+
+
 
 export {DataMessagesHistory};

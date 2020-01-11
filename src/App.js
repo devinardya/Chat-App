@@ -10,14 +10,17 @@ class App extends React.Component {
     this.state = {status : false, 
                   username: "",
                   counter: 0,
+                 
                   }
-    this.onLoginSubmit = this.onLoginSubmit.bind(this);
+    this.onPageChange = this.onPageChange.bind(this);
     this.onTextInputChange = this.onTextInputChange.bind(this);
     this.onChangeCounter = this.onChangeCounter.bind(this);
   }
 
-  onLoginSubmit(status) {
+  onPageChange(status) {
     this.setState({status: status})
+  
+    this.setState({counter: 0})
   }
 
   onTextInputChange(value, count) {
@@ -33,16 +36,16 @@ class App extends React.Component {
   render(){
 
     let renderPage;
-
+    //console.log(this.state.status)
     if (!this.state.status){
-        renderPage = <Login onSubmit={this.onLoginSubmit} onChange={this.onTextInputChange} counter={this.state.counter} username={this.state.username}/>
+        renderPage = <Login onSubmit={this.onPageChange} onChange={this.onTextInputChange} counter={this.state.counter} username={this.state.username}/>
     } else {
-        renderPage = <Chatbox username={this.state.username}/>
+        renderPage = <Chatbox username={this.state.username} onCloseChat={this.onPageChange}/>
     }
 
     return (
       <div className="App">
-              {renderPage} 
+            {renderPage} 
       </div>
     );
   }  

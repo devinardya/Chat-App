@@ -22,12 +22,21 @@
 .form{
   padding: 40px;
   border-radius: 10px;
-  height: 200px;
+  height: 250px;
   background-color: rgb(247, 247, 247);
   -webkit-box-shadow: 0px 1px 26px -4px rgba(0,0,0,0.58);
   -moz-box-shadow: 0px 1px 26px -4px rgba(0,0,0,0.58);
   box-shadow: 0px 1px 26px -4px rgba(0,0,0,0.58);
+  display: flex;
+  flex-flow: column wrap;
   position: relative;
+  align-items: center;
+}
+
+.login-icon{
+  position: absolute;
+  top: 30px;
+  left: 45%;
 }
 
 ::placeholder{
@@ -36,15 +45,16 @@
 }
 
 .form h3{
-  margin: 0;
-  color: rgba(255,0,104,1);
+  margin-top: 45px;
+  margin-bottom: 0;
+  color: #737373;
 }
 
 .form h5{
   font-size: 12px;
   margin-bottom: 30px;
   margin-top: 3px;
-  color: #737373;
+  color: #999999;
 }
 
 .login-button{
@@ -79,12 +89,16 @@
 }
 
 .warning{
-  margin-top: 5px 0;
+  margin-top: 5px;
+  margin-left: 20px;
   font-size: 10px;
   color: #737373;
+  align-self: flex-start;
+  position: relative;
 }
 .warning:first-of-type{
   margin-top: 10px;
+  text-align: left;
 }
 
 .messages{
@@ -134,14 +148,14 @@
 
 .send-button {
   margin-bottom: 10px;
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   border: none;
   background-color: rgb(214, 0, 86);
   border-radius: 50%;
   position: absolute;
-  top: -13px;
-  right: 0;
+  top: -7px;
+  right: 4%;
   color: white;
   font-weight: bold;
 }
@@ -153,13 +167,13 @@
 .chatbox{
   width: 80%;
   max-width: 800px;
-  height: 80%;
+  height: 55%;
   margin: 60px 0;
-  padding: 35px;
+  padding: 0px;
   background-color: rgb(255, 255, 255);
   border-radius: 10px;
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: column wrap;
   justify-content: space-between;
   -webkit-box-shadow: 0px 1px 26px -4px rgba(0,0,0,0.58);
   -moz-box-shadow: 0px 1px 26px -4px rgba(0,0,0,0.58);
@@ -172,10 +186,11 @@
   flex-flow: row wrap;
   justify-items:space-between;
   position: relative;
+  padding: 0 20px;
 }
 
 .chat-input{
-  width: calc(82.3% - 10px);
+  width: calc(87% - 10px);
   height: 34.2px;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
@@ -196,11 +211,11 @@
 .input-label, .input-label2{
   font-size: 11px;
   margin-top:5px;
-  color: rgb(85, 3, 85);
+  color: rgb(73, 73, 73);
 }
 
 .input-label2{
-  right: 10%;
+  right: 13%;
   position: absolute;
   bottom: 0;
 }
@@ -209,29 +224,64 @@
   font-size: 10px;
 }
 
-.chatbox h5{
+.profile h5{
   text-align: left;
-  margin-bottom: 10px;
-  margin-top: 5px;
-  color: rgb(214, 0, 86);
+  margin: 5px 0 10px 45px;
+  color: rgb(255, 255, 255);
+  padding: 10px 20px;
+  position: relative;
+  font-size: 22px;
+  font-weight: normal;
 }
 
 .chat-input-container{
   padding-top: 20px;
   width: 100%;
   background-color: #f5f5f5;
-  padding: 20px;
   border-radius: 0 0 20px 20px;
-
+  height: 13%;
 }
 
 .render-messages{
-  width: 100%;
   overflow-y: auto;
-  height: 80%;
+  height: 70%;
   display: flex;
   flex-direction: column;
   position : relative; 
   bottom:0;
+  padding: 0 20px;
 }
 
+.profile{
+ height: 9%;
+ width: 100%;
+ display: flex;
+ flex-flow: row wrap;
+ justify-content: space-between;
+ background-color: #985da0;
+ border-top-left-radius: 10px;
+ border-top-right-radius: 10px;
+}
+
+.close-button{
+  position: relative;
+  padding: 10px 20px;
+}
+
+.close-button:hover {
+  cursor: pointer;
+}
+
+.icons{
+  padding: 0;
+  position: absolute;
+  left: -15px;
+  top: 1px;
+}
+
+.profile-icon{
+  padding: 0;
+  position: absolute;
+  left: -20px;
+  top: 8px;
+}
