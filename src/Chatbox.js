@@ -128,6 +128,11 @@ class Chatbox extends React.Component{
         }
 
     // create DOM elements to render data history from the server
+
+        const options = {
+            convertAscii: true,
+        }
+
         printData = dataHis.map(data =>{
             checkMessages(data.username);
 
@@ -136,7 +141,7 @@ class Chatbox extends React.Component{
                     //console.log(word)
                     return <a key={word} href={word}>{word}</a>
                 }
-                return emojify(" " + word + " ", {output: 'unicode'});
+                return emojify(" " + word + " ", {output: "unicode"});
             })
 
             return (<div className={classNameMessage} key={data.id}>

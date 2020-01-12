@@ -41,9 +41,8 @@ class Login extends React.Component{
         let validateIcon1;
         let validateIcon2;
 
-
         // validate input box for errors =========================================
-        let regex = /[!"#€%&\/()=?+^¨*':;.,$°§@\[\]{}]{1,12}/g
+        let regex = /[!"#€%&\/()=?+^¨*':;.,$°§@\[\]{}]/g
         let notValidInput = regex.test(this.props.username);
 
         if (this.props.counter === 0) {
@@ -92,7 +91,7 @@ class Login extends React.Component{
                         <div className="form-bottom">
                             <input className="input-box" type="text" style={newcolor} placeholder="Username" username={this.props.value} onChange={this.onChange}/>
                             <label className="warning" style={warncolor}>{validateIcon1}Username have to be between 1 to 12 characters!</label>
-                            <label className="warning" style={warncolor2}>{validateIcon2}Username can only contains uppercase, lowercase, "-", "_" and numbers.</label>
+                            <label className="warning" style={warncolor2}>{validateIcon2}Username can only contains uppercase, lowercase, "-", "_", numbers and empty space.</label>
                         </div>
                         <button className="login-button">Log in</button>
                     </form>

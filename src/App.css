@@ -32,7 +32,7 @@
 }
 
 .form-top{
-  height: 58%;
+  height: 55%;
   width: 100%;
   background: rgb(255,0,104);
   background: linear-gradient(135deg, rgba(255,0,104,1) 0%, rgba(50,22,82,1) 100%);
@@ -45,14 +45,14 @@
 }
 
 .form-bottom{
-  height: 40%;
+  height: 45%;
   width: 80%;
   display: flex;
   flex-flow: column wrap;
   position: absolute;
   align-items: center;
   justify-content: center;
-  top: 50%;
+  top: 145px;
 }
 
 .login-icon{
@@ -68,16 +68,19 @@
 }
 
 .form h3{
-  margin-top: 55px;
+  margin-top: 60px;
   margin-bottom: 0;
   color: white;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
 }
 
 .form h5{
   font-size: 12px;
   margin-bottom: 30px;
-  margin-top: 5px;
+  margin-top: 0px;
   color: #ff9900;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .login-button{
@@ -91,7 +94,7 @@
   border: none;
   color: white;
   position: absolute;
-  bottom: -11%;
+  bottom: -12.5%;
   font-weight: 800;
   box-shadow: 0px 8px 14px -2px rgba(0,0,0,0.21);
 }
@@ -118,6 +121,7 @@
   color: #737373;
   align-self: flex-start;
   position: relative;
+  font-family: 'Open Sans', sans-serif;
 }
 .warning:first-of-type{
   margin-top: 10px;
@@ -141,12 +145,13 @@
   line-height: 17px;
   width: 50%;
   border-radius: 0 20px 0 20px;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .user-messages{
     font-size: 12px;
     text-align: right;
-    background: rgba(253, 0, 104, 0.2);
+    background: rgba(253, 0, 104, 0.1);
     padding: 10px 20px;
     margin: 8px 0px;
     overflow-wrap: break-word;
@@ -156,6 +161,7 @@
     width: 50%;
     align-self: flex-end;
     border-radius: 20px 0 20px 0;
+    font-family: 'Open Sans', sans-serif;
 }
 
 .user-messages .uName{
@@ -215,7 +221,7 @@
 }
 
 .chat-input{
-  width: calc(87% - 10px);
+  width: calc(86% - 10px);
   height: 34.2px;
   border-radius: 5px 0 0 5px;
   border: none;
@@ -229,7 +235,7 @@
 
 .textMessages{
   color: rgb(36, 36, 36);
-  margin: 0 0 3px 0;
+  margin: 5px 0 3px 0;
 }
 
 .input-label, .input-label2{
@@ -250,16 +256,18 @@
 
 .profile h5{
   text-align: left;
-  margin: 0px 0 0px 45px;
+  margin: 0px 0 0px 40px;
   color: rgb(255, 255, 255);
   padding: 10px 20px;
   position: relative;
   font-size: 16px;
-  font-weight: normal;
+  font-weight: bold;
+  font-family: 'Open Sans', sans-serif;
+
 }
 
 .chat-input-container{
-  padding-top: 20px;
+  padding-top: 10px;
   width: 100%;
   border-radius: 0 0 10px 10px;
   height: 13%;
@@ -267,7 +275,7 @@
 
 .render-messages{
   overflow-y: auto;
-  height: 73%;
+  height: 75%;
   display: flex;
   flex-direction: column;
   position : relative; 
@@ -282,7 +290,8 @@
  flex-flow: row wrap;
  justify-content: space-between;
  align-items: center;
- background-color: #985da0;
+ background: rgb(255,0,104);
+  background: linear-gradient(145deg, rgba(255,0,104,1) 0%, rgba(50,22,82,1) 100%);
  border-radius: 10px 10px 0 0;
 }
 
@@ -305,6 +314,6 @@
 .profile-icon{
   padding: 0;
   position: absolute;
-  left: -20px;
+  left: -15px;
   top: 4px;
 }
