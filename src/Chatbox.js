@@ -108,51 +108,49 @@ class Chatbox extends React.Component{
         let getSubmit;
 
     // input box validation  
-    //let name = this.props.username;
-        //console.log(name)
-
-      if (count > 200){
+   
+        if (count > 200){
             newcolor = {color: "red"}
             getSubmit = this.notSubmit;
-      } else {
-          newcolor = {color: "#252525"}
-          getSubmit = this.onSubmit;
-      }
+        } else {
+            newcolor = {color: "#252525"}
+            getSubmit = this.onSubmit;
+        }
 
    // saving data from server to a new local variable
-    if (dataH !== undefined){
+        if (dataH !== undefined){
 
-        dataH.map(data =>{
-            return dataHis.push(data)
-        })
-    }
+            dataH.map(data =>{
+                return dataHis.push(data)
+            })
+        }
 
-    function isLink(string){
-        let urlRegex = /https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,}/;
-        return urlRegex.test(string);
-    }
+    // function to check if there's link inside the string
+        function isLink(string){
+            let urlRegex = /https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,}/;
+            return urlRegex.test(string);
+        }
 
     // create DOM elements to render data history from the server
-    printData = dataHis.map(data =>{
-        checkMessages(data.username);
+        printData = dataHis.map(data =>{
+            checkMessages(data.username);
 
-        let content = data.content.split(" ").map(word => {
-            if (isLink(word)){
-                //console.log(word)
-                return <a key={word} href={word}>{word}</a>
-            }
-            return emojify(" " + word + " ", {output: 'unicode'});
-        })
+            let content = data.content.split(" ").map(word => {
+                if (isLink(word)){
+                    //console.log(word)
+                    return <a key={word} href={word}>{word}</a>
+                }
+                return emojify(" " + word + " ", {output: 'unicode'});
+            })
 
-
-        return (<div className={classNameMessage} key={data.id}>
-                    <p className="uName">{data.username}</p>
-                    <p  className="textMessages">{content}</p>
-                </div>)
-    })  
+            return (<div className={classNameMessage} key={data.id}>
+                        <p className="uName">{data.username}</p>
+                        <p  className="textMessages">{content}</p>
+                    </div>)
+        })  
 
     // to check if the username is the same with the one from the server - to change chat bubble style
-      function checkMessages(data){
+        function checkMessages(data){
             if (data === userCurrent){
               return  classNameMessage = "user-messages";
             } else {
