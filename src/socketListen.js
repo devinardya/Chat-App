@@ -1,21 +1,29 @@
 import io from 'socket.io-client';
 
-function DataMessagesHistory(cb){
+function DataMessagesHistory(){
     
-    var socket = io('http://3.120.96.16:3000');
+    const socket = io('http://3.120.96.16:3000');
 
-    socket.on('connect', function(){
-       cb(null, console.log("CONNECTED")) 
-    });
-  
-    //getting all the messages sent before (history)
-    socket.on('messages', data =>{
-        console.log("messages", data);
-        cb(null, data);
-    });
-  
-} 
+    function connect(){
+        return new Promise((resolve, reject) => {
+            socket.on('connect', function(){
+                resolve(console.log("CONNECTED")) 
+            })
+        })
+    }
 
+    function getDataHistory(){
+        return new Promise((resolve, reject) =>{
+            socket.on('messages', data =>{
+                console.log("messages", data);
+                resolve(data);
+            })
+        })
+    }
 
+    return connect()
+    .then(getDataHistory)
+
+}
 
 export {DataMessagesHistory};

@@ -23,24 +23,42 @@ class Chatbox extends React.Component{
     
       }
 
+    gettingData(){
+        //DataMessagesHistory((err, chatHistory) => this.setState({dataHistory: chatHistory}));
+       /*  DataMessagesUpdate((err, neWMessage) => {
+                     let copyMessage = [...this.state.dataHistory];
+                     copyMessage.splice(0, 1);
+     
+                     this.setState({ dataHistory: [...copyMessage, neWMessage] });
+                     console.log('roar')
+                   }) */
+
+        DataMessagesHistory()
+        .then( chatHistory => {
+            console.log(chatHistory)
+            this.setState({dataHistory: chatHistory})
+        })
+
+        DataMessagesUpdate()
+        .then ((newMessage) => {
+            let copyMessage = [...this.state.dataHistory];
+            copyMessage.splice(0, 1);
+            this.setState({ dataHistory: [...copyMessage, newMessage] });
+        })
+    }
+
    componentDidMount(){
-        DataMessagesHistory((err, chatHistory) => this.setState({dataHistory: chatHistory}));
-       /*   DataMessagesUpdate((chatLastUpdate) => {
-                this.setState({dataLastUpdate: chatLastUpdate});
-        
-                this.setState(prevState => ({
-                    dataHistory: [...prevState.dataHistory, this.state.dataLastUpdate]
-                  }))
-
-                });     */
-
-        DataMessagesUpdate((err, neWMessage) => {
-                    let copyMessage = [...this.state.dataHistory];
-                    copyMessage.splice(0, 1);
-    
-                    this.setState({ dataHistory: [...copyMessage, neWMessage] });
-                  })
+      
+        this.gettingData();
+        this.scrollToBottom();
     }   
+
+    componentDidUpdate(){
+        this.scrollToBottom();
+    }
+
+    componentWillUnmount(){
+    }
 
 
     onChange(e){
@@ -68,6 +86,13 @@ class Chatbox extends React.Component{
 
     onCloseChat(){
         this.props.onCloseChat(this.state.valid);
+    }
+
+    scrollToBottom(){
+        const scrollHeight = this.messageList.scrollHeight;
+        const height = this.messageList.clientHeight;
+        const maxScrollTop = scrollHeight - height;
+        this.messageList.scrollTop = maxScrollTop > 0 ? maxScrollTop: 0;
     }
 
 
@@ -113,7 +138,7 @@ class Chatbox extends React.Component{
 
         let content = data.content.split(" ").map(word => {
             if (isLink(word)){
-                console.log(word)
+                //console.log(word)
                 return <a key={word} href={word}>{word}</a>
             }
             return emojify(" " + word + " ", {output: 'unicode'});
@@ -143,7 +168,7 @@ class Chatbox extends React.Component{
                         </h5>
                         <span className="close-button"><MdClose size="30px" color="white" onClick={this.onCloseChat}/></span>
                     </div>
-                    <div className="render-messages">
+                    <div className="render-messages" ref={(div) => {this.messageList = div;}}>
                         {printData}
                     </div>
                     <div className="chat-input-container">
