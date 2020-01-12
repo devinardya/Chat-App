@@ -1,7 +1,7 @@
 import React from 'react';
 import { MdDone } from "react-icons/md";
 import { MdClose } from "react-icons/md";
-import { MdPerson } from "react-icons/md";
+import { MdAccountCircle } from "react-icons/md";
 
 class Login extends React.Component{
 
@@ -84,12 +84,16 @@ class Login extends React.Component{
         let newPage;
 
         newPage = (<form className = "form" onSubmit = {getSubmit}>
-                        <span className="login-icon"><MdPerson className ="icons" size="60px" color="rgb(184, 3, 139" /></span> 
-                        <h3>Log in</h3>
-                        <h5>Please log in to join the chat room!</h5>
-                        <input className="input-box" type="text" style={newcolor} placeholder="Username" username={this.props.value} onChange={this.onChange}/>
-                        <label className="warning" style={warncolor}>{validateIcon1}Username have to be between 1 to 12 characters!</label>
-                        <label className="warning" style={warncolor2}>{validateIcon2}Username can only contains uppercase, lowercase, "-", "_" and numbers.</label>
+                        <div className="form-top">
+                            <span className="login-icon"><MdAccountCircle className ="icons" size="60px" color="white" /></span> 
+                            <h3>Log in</h3>
+                            <h5>Please log in to join the chat room!</h5>
+                        </div>
+                        <div className="form-bottom">
+                            <input className="input-box" type="text" style={newcolor} placeholder="Username" username={this.props.value} onChange={this.onChange}/>
+                            <label className="warning" style={warncolor}>{validateIcon1}Username have to be between 1 to 12 characters!</label>
+                            <label className="warning" style={warncolor2}>{validateIcon2}Username can only contains uppercase, lowercase, "-", "_" and numbers.</label>
+                        </div>
                         <button className="login-button">Log in</button>
                     </form>
                 )

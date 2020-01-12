@@ -20,22 +20,17 @@ class Chatbox extends React.Component{
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.onCloseChat = this.onCloseChat.bind(this);
+        this.gettingData = this.gettingData.bind(this);
+        this.scrollToBottom = this.scrollToBottom.bind(this);
+        
     
       }
 
     gettingData(){
-        //DataMessagesHistory((err, chatHistory) => this.setState({dataHistory: chatHistory}));
-       /*  DataMessagesUpdate((err, neWMessage) => {
-                     let copyMessage = [...this.state.dataHistory];
-                     copyMessage.splice(0, 1);
-     
-                     this.setState({ dataHistory: [...copyMessage, neWMessage] });
-                     console.log('roar')
-                   }) */
 
         DataMessagesHistory()
         .then( chatHistory => {
-            console.log(chatHistory)
+            //console.log(chatHistory)
             this.setState({dataHistory: chatHistory})
         })
 
@@ -90,9 +85,10 @@ class Chatbox extends React.Component{
 
     scrollToBottom(){
         const scrollHeight = this.messageList.scrollHeight;
-        const height = this.messageList.clientHeight;
+        this.messageList.scrollTop = scrollHeight;
+       /*  const height = this.messageList.clientHeight;
         const maxScrollTop = scrollHeight - height;
-        this.messageList.scrollTop = maxScrollTop > 0 ? maxScrollTop: 0;
+        this.messageList.scrollTop = maxScrollTop > 0 ? maxScrollTop: 0; */
     }
 
 
