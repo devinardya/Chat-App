@@ -6,8 +6,11 @@ import { MdClose } from "react-icons/md";
 import { MdAccountCircle } from "react-icons/md";
 import {emojify} from 'react-emojione';
 
+const socket = io('http://3.120.96.16:3000');
+
 
 class Chatbox extends React.Component{
+
 
     constructor(props){
         super(props);
@@ -20,13 +23,11 @@ class Chatbox extends React.Component{
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.onCloseChat = this.onCloseChat.bind(this);
-        this.gettingData = this.gettingData.bind(this);
         this.scrollToBottom = this.scrollToBottom.bind(this);
-        
-    
       }
 
-    gettingData(){
+
+   componentDidMount(){
 
         DataMessagesHistory()
         .then( chatHistory => {
@@ -40,11 +41,7 @@ class Chatbox extends React.Component{
             copyMessage.splice(0, 1);
             this.setState({ dataHistory: [...copyMessage, newMessage] });
         })
-    }
 
-   componentDidMount(){
-      
-        this.gettingData();
         this.scrollToBottom();
     }   
 
@@ -53,8 +50,9 @@ class Chatbox extends React.Component{
     }
 
     componentWillUnmount(){
+        socket.close()
+        console.log("DISCONNECTED")
     }
-
 
     onChange(e){
           this.setState({value: e.target.value});
@@ -67,15 +65,16 @@ class Chatbox extends React.Component{
     onSubmit(e){
     
         e.preventDefault();
-      let name = this.props.username;
+        let name = this.props.username;
         console.log(name)
-        var socket = io('http://3.120.96.16:3000');
+
         socket.emit("message",{
             username: name,
             content: this.state.value,
         }, (response) =>{
             console.log("Emitted", response)
         });  
+
         this.setState({value: ""});
     }
 
@@ -86,9 +85,6 @@ class Chatbox extends React.Component{
     scrollToBottom(){
         const scrollHeight = this.messageList.scrollHeight;
         this.messageList.scrollTop = scrollHeight;
-       /*  const height = this.messageList.clientHeight;
-        const maxScrollTop = scrollHeight - height;
-        this.messageList.scrollTop = maxScrollTop > 0 ? maxScrollTop: 0; */
     }
 
 
@@ -128,10 +124,6 @@ class Chatbox extends React.Component{
         }
 
     // create DOM elements to render data history from the server
-
-        const options = {
-            convertAscii: true,
-        }
 
         printData = dataHis.map(data =>{
             checkMessages(data.username);
