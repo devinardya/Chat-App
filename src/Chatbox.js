@@ -1,13 +1,13 @@
 import React from 'react';
-import {DataMessagesHistory} from './socketListen';
-import {DataMessagesUpdate} from './SocketWrite';
+import { DataMessagesHistory } from './socketListen';
+import { DataMessagesUpdate } from './SocketWrite';
 import io from 'socket.io-client';
 import { MdClose } from "react-icons/md";
 import { MdAccountCircle } from "react-icons/md";
-import {emojify} from 'react-emojione';
+import { emojify } from 'react-emojione';
+
 
 const socket = io('http://3.120.96.16:3000');
-
 
 class Chatbox extends React.Component{
 
@@ -18,6 +18,7 @@ class Chatbox extends React.Component{
             value: "",  
             counter: 0,
             valid: false,
+            messages: []
         }
       
         this.onChange = this.onChange.bind(this);
@@ -26,31 +27,31 @@ class Chatbox extends React.Component{
         this.scrollToBottom = this.scrollToBottom.bind(this);
       }
 
-
    componentDidMount(){
-
         DataMessagesHistory()
         .then( chatHistory => {
             //console.log(chatHistory)
             this.setState({dataHistory: chatHistory})
         })
 
-        DataMessagesUpdate()
-        .then ((newMessage) => {
-            let copyMessage = [...this.state.dataHistory];
-            copyMessage.splice(0, 1);
+        DataMessagesUpdate(socket, (err, newMessage) => {	
+            let copyMessage = [...this.state.dataHistory];	
+            copyMessage.splice(0, 1);	
+            console.log(newMessage)
             this.setState({ dataHistory: [...copyMessage, newMessage] });
         })
-
+        //this.updateData();
         this.scrollToBottom();
     }   
 
     componentDidUpdate(){
+       
         this.scrollToBottom();
+        
     }
 
     componentWillUnmount(){
-        socket.close()
+        socket.close();
         console.log("DISCONNECTED")
     }
 
@@ -67,7 +68,7 @@ class Chatbox extends React.Component{
         e.preventDefault();
         let name = this.props.username;
         console.log(name)
-
+       
         socket.emit("message",{
             username: name,
             content: this.state.value,
@@ -75,7 +76,10 @@ class Chatbox extends React.Component{
             console.log("Emitted", response)
         });  
 
+        let message = [{username: name, content: this.state.value}]
+        this.setState({messages: message})
         this.setState({value: ""});
+
     }
 
     onCloseChat(){
@@ -98,9 +102,11 @@ class Chatbox extends React.Component{
         let count = this.state.value.length;
         let newcolor;
         let getSubmit;
+        let myOwnMessages = this.state.messages;
+        console.log(myOwnMessages)
 
     // input box validation  
-   
+       
         if (count > 200){
             newcolor = {color: "red"}
             getSubmit = this.notSubmit;
@@ -108,13 +114,23 @@ class Chatbox extends React.Component{
             newcolor = {color: "#252525"}
             getSubmit = this.onSubmit;
         }
-
+        
    // saving data from server to a new local variable
         if (dataH !== undefined){
 
             dataH.map(data =>{
+               
                 return dataHis.push(data)
             })
+        }
+
+        console.log(dataHis)
+
+        if (myOwnMessages.length !== 0){
+            let copyDataHis = [...dataHis];	
+            copyDataHis.splice(0, 1);	
+            console.log(myOwnMessages[0])
+            dataHis = [...copyDataHis, myOwnMessages[0]];
         }
 
     // function to check if there's link inside the string

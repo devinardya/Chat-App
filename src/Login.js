@@ -85,7 +85,7 @@ class Login extends React.Component{
         newPage = (<form className = "form" onSubmit = {getSubmit}>
                         <div className="form-top">
                             <span className="login-icon"><MdAccountCircle className ="icons" size="60px" color="white" /></span> 
-                            <h3>Log in</h3>
+                            <h3>Welcome!</h3>
                             <h5>Please log in to join the chat room!</h5>
                         </div>
                         <div className="form-bottom">
