@@ -18,7 +18,8 @@ class Chatbox extends React.Component{
             value: "",  
             counter: 0,
             valid: false,
-            messages: []
+            messages: [],
+            dataHistory: []
         }
       
         this.onChange = this.onChange.bind(this);
@@ -37,15 +38,23 @@ class Chatbox extends React.Component{
         DataMessagesUpdate(socket, (err, newMessage) => {	
             let copyMessage = [...this.state.dataHistory];	
             copyMessage.splice(0, 1);	
-            console.log(newMessage)
+            //console.log(newMessage)
             this.setState({ dataHistory: [...copyMessage, newMessage] });
         })
-        //this.updateData();
+        
         this.scrollToBottom();
     }   
 
+    gettingUpdate(){
+        let myOwnMessages = this.state.messages;
+        console.log(myOwnMessages)
+        let copyUpdateMessage = [...this.state.dataHistory];	
+        copyUpdateMessage.splice(0, 1);	
+        //console.log(newMessage)
+        this.setState({ dataHistory: [...copyUpdateMessage, myOwnMessages[0]] });  
+    }
+
     componentDidUpdate(){
-       
         this.scrollToBottom();
         
     }
@@ -76,10 +85,13 @@ class Chatbox extends React.Component{
             console.log("Emitted", response)
         });  
 
-        let message = [{username: name, content: this.state.value}]
-        this.setState({messages: message})
+        let message = {username: name, content: this.state.value};
+        let copyMessage = [...this.state.dataHistory];	
+        copyMessage.splice(0, 1);	
+        this.setState({ dataHistory: [...copyMessage, message] });
         this.setState({value: ""});
-
+   
+        
     }
 
     onCloseChat(){
@@ -126,12 +138,6 @@ class Chatbox extends React.Component{
 
         console.log(dataHis)
 
-        if (myOwnMessages.length !== 0){
-            let copyDataHis = [...dataHis];	
-            copyDataHis.splice(0, 1);	
-            console.log(myOwnMessages[0])
-            dataHis = [...copyDataHis, myOwnMessages[0]];
-        }
 
     // function to check if there's link inside the string
         function isLink(string){
