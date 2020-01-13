@@ -18,10 +18,10 @@ class Chatbox extends React.Component{
             value: "",  
             counter: 0,
             valid: false,
-            messages: [],
             dataHistory: []
         }
       
+        this.messageList = React.createRef();
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.onCloseChat = this.onCloseChat.bind(this);
@@ -44,15 +44,6 @@ class Chatbox extends React.Component{
         
         this.scrollToBottom();
     }   
-
-    gettingUpdate(){
-        let myOwnMessages = this.state.messages;
-        console.log(myOwnMessages)
-        let copyUpdateMessage = [...this.state.dataHistory];	
-        copyUpdateMessage.splice(0, 1);	
-        //console.log(newMessage)
-        this.setState({ dataHistory: [...copyUpdateMessage, myOwnMessages[0]] });  
-    }
 
     componentDidUpdate(){
         this.scrollToBottom();
@@ -90,8 +81,7 @@ class Chatbox extends React.Component{
         copyMessage.splice(0, 1);	
         this.setState({ dataHistory: [...copyMessage, message] });
         this.setState({value: ""});
-   
-        
+ 
     }
 
     onCloseChat(){
@@ -99,8 +89,8 @@ class Chatbox extends React.Component{
     }
 
     scrollToBottom(){
-        const scrollHeight = this.messageList.scrollHeight;
-        this.messageList.scrollTop = scrollHeight;
+        const scrollHeight = this.messageList.current.scrollHeight;
+        this.messageList.current.scrollTop = scrollHeight;
     }
 
 
@@ -114,8 +104,6 @@ class Chatbox extends React.Component{
         let count = this.state.value.length;
         let newcolor;
         let getSubmit;
-        let myOwnMessages = this.state.messages;
-        console.log(myOwnMessages)
 
     // input box validation  
        
@@ -136,7 +124,7 @@ class Chatbox extends React.Component{
             })
         }
 
-        console.log(dataHis)
+       // console.log(dataHis)
 
 
     // function to check if there's link inside the string
@@ -159,8 +147,8 @@ class Chatbox extends React.Component{
             })
 
             return (<div className={classNameMessage} key={data.id}>
-                        <p className="uName">{data.username}</p>
-                        <p  className="textMessages">{content}</p>
+                        <p key={data.id} className="uName">{data.username}</p>
+                        <p key={data.timestamps} className="textMessages">{content}</p>
                     </div>)
         })  
 
@@ -181,7 +169,7 @@ class Chatbox extends React.Component{
                         </h5>
                         <span className="close-button"><MdClose size="30px" color="white" onClick={this.onCloseChat}/></span>
                     </div>
-                    <div className="render-messages" ref={(div) => {this.messageList = div;}}>
+                    <div className="render-messages" ref={this.messageList}>
                         {printData}
                     </div>
                     <div className="chat-input-container">
