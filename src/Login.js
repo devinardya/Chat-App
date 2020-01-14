@@ -13,7 +13,7 @@ class Login extends React.Component{
         }
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-    
+        this.onNotSubmit = this.onNotSubmit.bind(this);
       }
     
     onChange(e){
@@ -22,14 +22,13 @@ class Login extends React.Component{
 
     } 
 
-    notSubmit(e){
-        e.preventDefault();
-    }
-
-
     onSubmit(e){
         e.preventDefault();
         this.props.onSubmit(true)
+    }
+
+    onNotSubmit(e){
+        e.preventDefault();
     }
 
     render(){
@@ -41,22 +40,24 @@ class Login extends React.Component{
         let validateIcon1;
         let validateIcon2;
 
-        // validate input box for errors =========================================
+        // validate input box for error input from user =========================================
         let regex = /[!"#€%&\/()=?+^¨*':;.,$°§@\[\]{}]/g
         let notValidInput = regex.test(this.props.username);
 
+        // if user enter a character that is not alphabet, numbers, empty space,  - or _ and left the input box empty or more than 12 characters
+        // then the input is not valid. 
         if (this.props.counter === 0) {
             warncolor = {color: "red"};
             warncolor2 = {color: "red"};
             newcolor = {color: "red"};
-            getSubmit = this.notSubmit;
+            getSubmit = this.onNotSubmit;
             validateIcon1 = <MdCancel className ="icons" size="12px" color="red" />
             validateIcon2 = <MdCancel className ="icons" size="12px" color="red" />
         } else if (this.props.counter > 12 ) {
             warncolor = {color: "red"};
             warncolor2 = {color: "green"};
             newcolor = {color: "red"};
-            getSubmit = this.notSubmit;
+            getSubmit = this.onNotSubmit;
             validateIcon1 = <MdCancel className ="icons" size="12px" color="red" />
             validateIcon2 = <MdCancel className ="icons" size="12px" color="green" />
             //console.log("this is false")
@@ -64,7 +65,7 @@ class Login extends React.Component{
             warncolor = {color: "green"};
             warncolor2 = {color: "red"};
             newcolor = {color: "red"};
-            getSubmit = this.notSubmit;
+            getSubmit = this.onNotSubmit;
             validateIcon1 = <MdCancel className ="icons" size="12px" color="green" />
             validateIcon2 = <MdCancel className ="icons" size="12px" color="red" />
             //console.log("notvalidinput")
@@ -80,9 +81,8 @@ class Login extends React.Component{
 
         // create DOM elements to render the login page =========================================
 
-        let newPage;
-
-        newPage = (<form className = "form" onSubmit = {getSubmit}>
+        return  (<div className = "login-box">
+                    <form className = "form" onSubmit = {getSubmit}>
                         <div className="form-top">
                             <span className="login-icon"><AiFillWechat className ="icons" size="60px" color="white" /></span> 
                             <h3>Welcome!</h3>
@@ -95,11 +95,6 @@ class Login extends React.Component{
                         </div>
                         <button className="login-button">Log in</button>
                     </form>
-                )
-     
-
-        return  (<div className = "login-box">
-                    {newPage}
                 </div>)   
     }
 }

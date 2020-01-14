@@ -165,7 +165,7 @@ class Chatbox extends React.Component{
         return (
                 <div className="chatbox">
                     <div className="profile">
-                        <h5><MdAccountCircle className="profile-icon" size="30px" color="white" onClick={this.onCloseChat}/> 
+                        <h5><MdAccountCircle className="profile-icon" size="30px" color="white" /> 
                             {this.props.username}
                         </h5>
                         <span className="close-button"><MdClose size="30px" color="white" onClick={this.onCloseChat}/></span>
