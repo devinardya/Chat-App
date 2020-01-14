@@ -18,11 +18,12 @@ class Chatbox extends React.Component{
             value: "",  
             counter: 0,
             valid: false,
-            dataHistory: []
+            dataHistory: [],
         }
       
         this.messageList = React.createRef();
         this.onChange = this.onChange.bind(this);
+        this.onNotSubmit = this.onNotSubmit.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.onCloseChat = this.onCloseChat.bind(this);
         this.scrollToBottom = this.scrollToBottom.bind(this);
@@ -59,7 +60,7 @@ class Chatbox extends React.Component{
           this.setState({value: e.target.value});
     } 
 
-    notSubmit(e){
+    onNotSubmit(e){
         e.preventDefault();
     }
 
@@ -98,7 +99,7 @@ class Chatbox extends React.Component{
     
         let printData;
         let dataH = this.state.dataHistory;
-        let dataHis = [];
+        let messageLog = [];
         let classNameMessage;
         let userCurrent = this.props.username;
         let count = this.state.value.length;
@@ -107,9 +108,9 @@ class Chatbox extends React.Component{
 
     // input box validation  
        
-        if (count > 200){
+        if (count > 200 || count === 0){
             newcolor = {color: "red"}
-            getSubmit = this.notSubmit;
+            getSubmit = this.onNotSubmit;
         } else {
             newcolor = {color: "#252525"}
             getSubmit = this.onSubmit;
@@ -120,11 +121,11 @@ class Chatbox extends React.Component{
 
             dataH.map(data =>{
                
-                return dataHis.push(data)
+                return messageLog.push(data)
             })
         }
 
-       // console.log(dataHis)
+       // console.log(messageLog)
 
 
     // function to check if there's link inside the string
@@ -134,8 +135,8 @@ class Chatbox extends React.Component{
         }
 
     // create DOM elements to render data history from the server
-
-        printData = dataHis.map(data =>{
+  
+        printData = messageLog.map(data =>{
             checkMessages(data.username);
 
             let content = data.content.split(" ").map(word => {
@@ -143,7 +144,7 @@ class Chatbox extends React.Component{
                     //console.log(word)
                     return <a key={word} href={word}>{word}</a>
                 }
-                return emojify(" " + word + " ", {output: "unicode"});
+                return emojify(" " + word + " ");
             })
 
             return (<div className={classNameMessage} key={data.id}>
@@ -155,7 +156,7 @@ class Chatbox extends React.Component{
     // to check if the username is the same with the one from the server - to change chat bubble style
         function checkMessages(data){
             if (data === userCurrent){
-              return  classNameMessage = "user-messages";
+              return  classNameMessage = "messages user";
             } else {
               return  classNameMessage = "messages";
             }
@@ -176,8 +177,7 @@ class Chatbox extends React.Component{
                         <form className="chat-form" onSubmit = {getSubmit}>
                             <input className="chat-input" style={newcolor} type="text" placeholder="Enter messages..." value={this.state.value} onChange={this.onChange}/>
                             <button className="send-button">Send</button>
-                            <span className="input-label">Maximum 200 characters</span>
-                            <span className="input-label2" style={newcolor}>{count}/200</span>
+                            <span className="input-label" style={newcolor}>{count}/200 characters</span>
                         </form>
                     </div>
                 </div>

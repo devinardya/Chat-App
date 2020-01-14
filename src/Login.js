@@ -1,7 +1,7 @@
 import React from 'react';
-import { MdDone } from "react-icons/md";
-import { MdClose } from "react-icons/md";
-import { MdAccountCircle } from "react-icons/md";
+import { MdCheckCircle } from "react-icons/md";
+import { MdCancel } from "react-icons/md";
+import { AiFillWechat } from "react-icons/ai";
 
 class Login extends React.Component{
 
@@ -50,31 +50,31 @@ class Login extends React.Component{
             warncolor2 = {color: "red"};
             newcolor = {color: "red"};
             getSubmit = this.notSubmit;
-            validateIcon1 = <MdClose className ="icons" size="10px" color="red" />
-            validateIcon2 = <MdClose className ="icons" size="10px" color="red" />
+            validateIcon1 = <MdCancel className ="icons" size="12px" color="red" />
+            validateIcon2 = <MdCancel className ="icons" size="12px" color="red" />
         } else if (this.props.counter > 12 ) {
             warncolor = {color: "red"};
             warncolor2 = {color: "green"};
             newcolor = {color: "red"};
             getSubmit = this.notSubmit;
-            validateIcon1 = <MdClose className ="icons" size="10px" color="red" />
-            validateIcon2 = <MdClose className ="icons" size="10px" color="green" />
+            validateIcon1 = <MdCancel className ="icons" size="12px" color="red" />
+            validateIcon2 = <MdCancel className ="icons" size="12px" color="green" />
             //console.log("this is false")
         } else if (notValidInput){
             warncolor = {color: "green"};
             warncolor2 = {color: "red"};
             newcolor = {color: "red"};
             getSubmit = this.notSubmit;
-            validateIcon1 = <MdClose className ="icons" size="10px" color="green" />
-            validateIcon2 = <MdClose className ="icons" size="10px" color="red" />
+            validateIcon1 = <MdCancel className ="icons" size="12px" color="green" />
+            validateIcon2 = <MdCancel className ="icons" size="12px" color="red" />
             //console.log("notvalidinput")
         } else {
             warncolor = {color: "green"};
             warncolor2 = {color: "green"};
             newcolor = {color: "#252525"};
             getSubmit = this.onSubmit;
-            validateIcon1 = <MdDone className ="icons" size="10px" color="green" />
-            validateIcon2 = <MdDone className ="icons" size="10px" color="green" />
+            validateIcon1 = <MdCheckCircle className ="icons" size="12px" color="green" />
+            validateIcon2 = <MdCheckCircle className ="icons" size="12px" color="green" />
             //console.log("this is trueeee")
         }
 
@@ -84,7 +84,7 @@ class Login extends React.Component{
 
         newPage = (<form className = "form" onSubmit = {getSubmit}>
                         <div className="form-top">
-                            <span className="login-icon"><MdAccountCircle className ="icons" size="60px" color="white" /></span> 
+                            <span className="login-icon"><AiFillWechat className ="icons" size="60px" color="white" /></span> 
                             <h3>Welcome!</h3>
                             <h5>Please log in to join the chat room!</h5>
                         </div>
