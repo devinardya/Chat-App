@@ -141,9 +141,8 @@
 /* ===== CHAT PAGE ===== */
 
 .chatbox{
-  width: 80%;
-  max-width: 800px;
-  height: 70%;
+  width: 70%;
+  height: 80%;
   padding: 0px;
   background-color: rgb(255, 255, 255);
   border-radius: 10px;
@@ -156,15 +155,16 @@
 }
 
 .profile{
-  height: 9%;
+  height: calc(9% - 10px);
   width: 100%;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
   background: rgb(255,0,104);
    background: linear-gradient(145deg, rgba(255,0,104,1) 0%, rgba(50,22,82,1) 100%);
   border-radius: 10px 10px 0 0;
+  padding: 10px 0;
  }
 
  .profile h5{
@@ -181,7 +181,7 @@
 
 .close-button{
   position: relative;
-  padding: 10px 20px;
+  padding: 0px 20px;
 }
 
 .close-button:hover {
@@ -204,12 +204,12 @@
 
  .render-messages{
   overflow-y: auto;
-  height: 75%;
+  height: 72%;
   display: flex;
   flex-direction: column;
   position : relative; 
   bottom:0;
-  padding: 0 20px;
+  padding: 0px;
 }
 
 .messages{
@@ -217,7 +217,7 @@
   text-align: left;
   background: rgb(241, 241, 241);
   padding: 10px 20px;
-  margin: 8px 0px;
+  margin: 8px 20px;
   overflow-wrap: break-word;
   word-wrap: break-word;
   hyphens: auto;
@@ -270,7 +270,7 @@ a {
 }
 
 .chat-input{
-  width: calc(86% - 10px);
+  width: calc(90% - 10px);
   height: 34.2px;
   border-radius: 5px 0 0 5px;
   border: none;
@@ -321,15 +321,23 @@ a {
   font-size: 10px;
 }
 
-@media only screen and (max-width: 1030px) {
+@media only screen and (max-width: 1024px) {
   .chatbox{
     width: 100vw;
     height: 100vh;
   }
 
   .render-messages{
-    width: 94%;
-    padding: 0 20px 0 20px;
+    width: 100%;
+    padding: 0;
+  }
+
+}
+
+@media only screen and (max-width: 650px) {
+  .chat-input{
+    width: calc(85% - 10px);
+    
   }
 
 }
