@@ -86,7 +86,7 @@ class Chatbox extends React.Component{
     }
 
     onCloseChat(){
-        this.props.onCloseChat(this.state.valid);
+        this.props.onCloseChat(this.state.valid, "");
     }
 
     scrollToBottom(){

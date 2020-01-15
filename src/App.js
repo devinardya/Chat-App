@@ -14,11 +14,12 @@ class App extends React.Component {
     this.onTextInputChange = this.onTextInputChange.bind(this);
   }
 
-  onPageChange(status) {
+  onPageChange(status, value) {
     this.setState({status: status})
+    this.setState({username: value});
   }
 
-  onTextInputChange(value, count) {
+  onTextInputChange(value) {
     //this.setState({counter: value.length})
     this.setState({username: value});
     

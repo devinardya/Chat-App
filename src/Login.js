@@ -9,7 +9,7 @@ class Login extends React.Component{
         super(props);
         this.state = {   
             valid: false,
-            
+            value: ""
         }
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -18,13 +18,14 @@ class Login extends React.Component{
     
     onChange(e){
 
-         this.props.onChange(e.target.value, e.target.value.length);
+         this.props.onChange(e.target.value);
+         this.setState({value: e.target.value})
 
     } 
 
     onSubmit(e){
         e.preventDefault();
-        this.props.onSubmit(true)
+        this.props.onSubmit(true, this.state.value)
     }
 
     onNotSubmit(e){
@@ -41,12 +42,12 @@ class Login extends React.Component{
         let validateIcon2;
 
         // validate input box for error input from user =========================================
-        let regex = /[a-zåäöüA-ZÖÄÅÜ0-9\-\_\s]{1,12}$/;
-        let validInput = regex.test(this.props.username);
+        let regex = /[!"#€%&\/()=?£$∞§≈±©~™…+^¨*':;.,$°§@\[\]{}]/g;
+        let notValidInput = regex.test(this.props.username);
 
         // if user enter a character that is not alphabet, numbers, empty space,  - or _ and left the input box empty or more than 12 characters
         // then the input is not valid. 
-        if (this.props.username.length === 0) {
+        if (this.props.username.length === 0 ) {
             warncolor = {color: "red"};
             warncolor2 = {color: "red"};
             newcolor = {color: "red"};
@@ -61,7 +62,7 @@ class Login extends React.Component{
             validateIcon1 = <MdCancel className ="icons" size="12px" color="red" />
             validateIcon2 = <MdCancel className ="icons" size="12px" color="green" />
             //console.log("this is false")
-        } else if (!validInput){
+        } else if (notValidInput){
             warncolor = {color: "green"};
             warncolor2 = {color: "red"};
             newcolor = {color: "red"};
