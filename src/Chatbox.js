@@ -135,32 +135,44 @@ class Chatbox extends React.Component{
         }
 
     // create DOM elements to render data history from the server
-  
+        let pointKey;
         printData = messageLog.map(data =>{
-            checkMessages(data.username);
-
-            let content = data.content.split(" ").map(word => {
+            checkUser(data.username);
+            //checkKey(data.username)
+            let content = data.content.split(" ").map((word, index) => {
                 if (isLink(word)){
                     //console.log(word)
-                    return <a key={word} href={word}>{word}</a>
+                    return <a key={index} href={word}>{word}</a>
                 }
-                return emojify(" " + word + " ");
+                let text = emojify(" " + word + " ")
+
+                return <span key={index}>{text}</span>
             })
 
-            return (<div className={classNameMessage} key={data.id}>
-                        <p key={data.id} className="uName">{data.username}</p>
-                        <p key={data.timestamps} className="textMessages">{content}</p>
+            // to create a unique key for each messages
+            if (data.username === userCurrent){
+                pointKey = "messages-"+ Math.round(Math.random() * 99999999999);
+            }else {
+                pointKey = data.id;
+            }
+
+            return (<div className={classNameMessage} key={pointKey}>
+                        <p className="uName">{data.username}</p>
+                        <p className="textMessages">{content}</p>
                     </div>)
         })  
 
     // to check if the username is the same with the one from the server - to change chat bubble style
-        function checkMessages(data){
+        function checkUser(data){
             if (data === userCurrent){
               return  classNameMessage = "messages user";
             } else {
               return  classNameMessage = "messages";
             }
         } 
+
+  
+
 
         return (
                 <div className="chatbox">

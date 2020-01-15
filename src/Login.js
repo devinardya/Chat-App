@@ -41,19 +41,19 @@ class Login extends React.Component{
         let validateIcon2;
 
         // validate input box for error input from user =========================================
-        let regex = /[!"#€%&\/()=?+^¨*':;.,$°§@\[\]{}]/g
-        let notValidInput = regex.test(this.props.username);
+        let regex = /[a-zåäöüA-ZÖÄÅÜ0-9\-\_\s]{1,12}$/;
+        let validInput = regex.test(this.props.username);
 
         // if user enter a character that is not alphabet, numbers, empty space,  - or _ and left the input box empty or more than 12 characters
         // then the input is not valid. 
-        if (this.props.counter === 0) {
+        if (this.props.username.length === 0) {
             warncolor = {color: "red"};
             warncolor2 = {color: "red"};
             newcolor = {color: "red"};
             getSubmit = this.onNotSubmit;
             validateIcon1 = <MdCancel className ="icons" size="12px" color="red" />
             validateIcon2 = <MdCancel className ="icons" size="12px" color="red" />
-        } else if (this.props.counter > 12 ) {
+        } else if (this.props.username.length > 12 ) {
             warncolor = {color: "red"};
             warncolor2 = {color: "green"};
             newcolor = {color: "red"};
@@ -61,7 +61,7 @@ class Login extends React.Component{
             validateIcon1 = <MdCancel className ="icons" size="12px" color="red" />
             validateIcon2 = <MdCancel className ="icons" size="12px" color="green" />
             //console.log("this is false")
-        } else if (notValidInput){
+        } else if (!validInput){
             warncolor = {color: "green"};
             warncolor2 = {color: "red"};
             newcolor = {color: "red"};
@@ -91,7 +91,7 @@ class Login extends React.Component{
                         <div className="form-bottom">
                             <input className="input-box" type="text" style={newcolor} placeholder="Username" username={this.props.value} onChange={this.onChange}/>
                             <label className="warning" style={warncolor}>{validateIcon1}Username have to be between 1 to 12 characters!</label>
-                            <label className="warning" style={warncolor2}>{validateIcon2}Username can only contains uppercase, lowercase, "-", "_", numbers and empty space.</label>
+                            <label className="warning" style={warncolor2}>{validateIcon2}Username can only contains uppercase, lowercase, hypen (-), underscore (_), numbers and empty space.</label>
                         </div>
                         <button className="login-button">Log in</button>
                     </form>
